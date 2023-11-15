@@ -9,31 +9,45 @@
             Padding="30,0"
             VerticalOptions="Center">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
+            <!-- Editor, Label, Button, Entry -->
+            <Label 
+                Text="Display Box"
+                
+                />
+            <Editor 
+                x:Name="editDisplay"
+                IsEnabled="False"
+                />
             <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
+                Text="User Input - Short Message" 
+                />
+            <Entry 
+                x:Name="entDisplayMessage"       
+                />
             <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                Text="Display Short Message from Entry"
+                x:Name="btnDisplayShortMessage"
+                Clicked="btnDisplayShortMessage_Clicked" />
+            <Button
+                Text="Append Short Message from Entry"
+                x:Name="btnAppendShortMessage"
+                Clicked="btnAppendShortMessage_Clicked" />
+
+            <Label 
+                Text="User Input - Editor (Long Message)"
+                />
+            <Editor 
+                x:Name="editUserLongMessage"
+                
+                />
+            <Button
+                Text="Append Long Message From Editor"
+                x:Name="btnAppendLongMessage"
+                Clicked="btnAppendLongMessage_Clicked" />
+            <Button
+                Text="Clear both Editors"
+                x:Name="btnClear"
+                Clicked="btnClear_Clicked" />
 
         </VerticalStackLayout>
     </ScrollView>

@@ -2,23 +2,45 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
 
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        // This display short message click event should replace the text in the editor
+        private void btnDisplayShortMessage_Clicked(object sender, EventArgs e)
         {
-            count++;
+            string displayMessage = entDisplayMessage.Text;
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            editDisplay.Text = displayMessage;
         }
+
+        // The Append short Message event should append the text ( append )
+        private void btnAppendShortMessage_Clicked(object sender, EventArgs e)
+        {
+            string displayMessage = entDisplayMessage.Text;
+
+            editDisplay.Text += displayMessage;
+        }
+
+        // This will append the message from our editor ( for long messages )
+        private void btnAppendLongMessage_Clicked(object sender, EventArgs e)
+        {
+            string longMessageToAppend = editUserLongMessage.Text;
+
+            editDisplay.Text += longMessageToAppend;
+        }
+
+        // Clear - Clears all text inputs. Both Editors and the Entry
+        private void btnClear_Clicked(object sender, EventArgs e)
+        {
+            entDisplayMessage.Text = "";
+            editDisplay.Text = "";
+            editUserLongMessage.Text = "";
+        }
+
+
+
     }
 }
