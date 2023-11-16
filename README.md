@@ -5,6 +5,29 @@
 ---
 This assignment to get comfortable working with the Editor control. This control is a large textbox for long messages ( like a paragraph or essay )
 
+To add an editor control we use <Editor />.
+To reference our editor in our C# we have to give it a name with x:Name.
+The .Text attribute is how we set, or get, the Text in the editor.
+
+```xaml
+    
+    Example
+    <Editor 
+        Text="This message will be displayed in the editor"
+        x:Name="editEditorName"
+    />
+
+```
+
+```csharp
+    To get the text from the editor
+    string userInformation = editEditorName.Text;
+
+    To change the text
+    editEditorName.Text = "Message to change to"
+```
+
+
 ## Step 1
 1. Create a new Maui project
 2. Clear template code on MainPage.xaml and MainPage.xaml.cs
@@ -18,10 +41,9 @@ This assignment to get comfortable working with the Editor control. This control
     2. Set the following attribute
     - x:Name="editDisplay" - This Gives our editor a name of editDisplay
     - IsEnabled="False" <!--- This prevents people from writing in the editor. We are using this editor to just show information.
-    
+
 
 ```xml
-
    <Label 
         Text="Display Box"   
         />
@@ -31,7 +53,203 @@ This assignment to get comfortable working with the Editor control. This control
         />
 ```
 
+## Step 2 - Display a short message
+
+In step 2, we are going to let the user type a small message. When the user presses a button, the message will display on our editor labeled  `editDisplay`
+
+**In MainPage.Xaml**
+Add a label, an entry ( for a single short message ), and a button.
+
+- Label
+    - Text="User Input - Short Message"
+- Entry
+    - x:Name="entDisplayMessage"
+- Button
+    - Text="Display Short Message from Entry"
+    - x:Name="btnDisplayShortMessage"
+    - Add a click event
+
+```xml
+      <Label
+        Text="User Input - Short Message" 
+        />
+    <Entry 
+        x:Name="entDisplayMessage"       
+        />
+    <Button
+        Text="Display Short Message from Entry"
+        x:Name="btnDisplayShortMessage"
+        Clicked="btnDisplayShortMessage_Clicked" />
+```
+
+**In MainPage.xaml.cs**
+
+Inside of our Button click event, which should be called `btnDisplayShortMessage_Clicked`, we are going to write code so when the user enters text in our entry, named entDisplayMessage, and they press our button, the message shows up in our editor, named editDisplay.
+
+1. First, we will declare a string variable called displayMessage. We will use this to store the data from our entry named, entDisplayMessage. 
+ 
+   `string displayMessage = entDisplayMessage.Text;`
+
+2. Now we will assign the value of displayMessage to our editor, editDisplay.
+
+    `editDisplay.Text = entDisplayMessage.Text;`
+
+
+```csharp
+    private void btnDisplayShortMessage_Clicked(object sender, EventArgs e)
+    {
+        // Declare a string variable, and how the value from our entry
+        string displayMessage = entDisplayMessage.Text;
+
+        // Assign the balue from our varible, to our editor
+        editDisplay.Text = displayMessage;
+    }
+```
+
+--- 
+
+## Step 3 - Append Text from Entry
+In the step we will add a new button. When the user clicks the button we will append, add, the text from our entry, entDisplayMessage.
+
+
+**In MainPage.xaml**
+
+We add 1 button.
+
+- Button
+    - Text="Append Short Message from Entry"
+    - x:Name="btnAppendShortMessage"
+    - Add a click event
+
+```xml
+    <Button
+        Text="Append Short Message from Entry"
+        x:Name="btnAppendShortMessage"
+        Clicked="btnAppendShortMessage_Clicked" />
+
+```
+
+**In MainPage.xaml.cs**
+
+In out click event, which should be called, `btnAppendShortMessage_Clicked`, we will write the code so we get the message from our entry, entDisplayMessage, and **Append** it in our rich text box.
+
+The code is similar to our code in our last method.
+    - Declare a string variable
+    - Store the value from our `entDisplayMessage.Text`
+
+But now instead of assigning the value to our editDisplay, we will append using the `+=` operator.
+
+```csharp
+   // The Append short Message event should append the text ( append )
+    private void btnAppendShortMessage_Clicked(object sender, EventArgs e)
+    {
+        string displayMessage = entDisplayMessage.Text;
+        editDisplay.Text += displayMessage;
+    }
+```
+
 ---
+## Step 4 - Append From another Editor
+Here, we will add another label, a 2nd editor, and another button. When the user presses this button, the text from our editor will append to our editDisplay.
+
+
+
+**In MainPage.xaml**
+
+    - Label
+        - Text="User Input - Editor (Long Message)"
+    - Editor
+        - x:Name="editUserLongMessage"
+    - Button
+        - Text="Append Long Message From Editor"
+        - x:Name="btnAppendLongMessage"
+        - Add a click event
+
+```xml
+    <Label 
+        Text="User Input - Editor (Long Message)"
+        />
+    <Editor 
+        x:Name="editUserLongMessage"
+                
+        />
+    <Button
+        Text="Append Long Message From Editor"
+        x:Name="btnAppendLongMessage"
+        Clicked="btnAppendLongMessage_Clicked" />
+
+```
+
+**In MainPage.xaml.cs**
+
+Inside of our new click event, which should be named `btnAppendLongMessage_Clicked`, we will write code to 
+    - Declare a new string variable, name longMessageToAppend
+    - Assign the value from our new editor with editUserLongMessage.Text
+    - APPEND that value to our original editor, editDisplay
+
+```csharp
+
+    // This will append the message from our editor ( for long messages )
+    private void btnAppendLongMessage_Clicked(object sender, EventArgs e)
+    {
+        string longMessageToAppend = editUserLongMessage.Text;
+
+        editDisplay.Text += longMessageToAppend;
+    }
+```
+
+---
+## Step 5 - Clear all text entrys and editors
+
+Finally, we create a button that when pressed, clears all the text from our
+    - Entry: entDisplayMessage
+    - Editor: editDisplay
+    - Editor: editUserLongMessage
+
+**In MainPage.xaml**
+Add a button
+
+        - Text="Clear both Editors"
+        - x:Name="btnClear"
+        - Add a click event
+
+```xml
+    <Button
+        Text="Clear both Editors"
+        x:Name="btnClear"
+        Clicked="btnClear_Clicked" />
+```
+
+**In MainPage.xaml.cs**
+
+Inside our method, all we need to do to clear a .Text field is to assign an empty set of double quotes, `""`.
+
+So assign empty double quotes to our entDisplayMessage, editDisplay, and editUserLongMessage.
+
+```csharp
+
+    // Clear - Clears all text inputs. Both Editors and the Entry
+    private void btnClear_Clicked(object sender, EventArgs e)
+    {
+        entDisplayMessage.Text = "";
+        editDisplay.Text = "";
+        editUserLongMessage.Text = "";
+    }
+```
+
+---
+
+With this you should have an app that lets the user display and append short and long messages to a editor. You can then clear all text boxes with a button click.
+
+---
+
+## For Submission
+Submit your GitHub repository link
+
+---
+## The Full Code
+
+
 ```xml
     <!-- Editor, Label, Button, Entry -->
     <Label 
