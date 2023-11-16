@@ -40,7 +40,7 @@ The .Text attribute is how we set, or get, the Text in the editor.
 2. Add an Editor `<Editor />`
     2. Set the following attribute
     - x:Name="editDisplay" - This Gives our editor a name of editDisplay
-    - IsEnabled="False" <!--- This prevents people from writing in the editor. We are using this editor to just show information.
+    - IsReadOnly="True" <!--- This prevents people from writing in the editor. We are using this editor to just show information.
 
 
 ```xml
@@ -49,7 +49,7 @@ The .Text attribute is how we set, or get, the Text in the editor.
         />
     <Editor 
         x:Name="editDisplay"
-        IsEnabled="False"
+        IsReadOnly="True"
         />
 ```
 
@@ -101,7 +101,7 @@ Inside of our Button click event, which should be called `btnDisplayShortMessage
         // Declare a string variable, and how the value from our entry
         string displayMessage = entDisplayMessage.Text;
 
-        // Assign the balue from our varible, to our editor
+        // Assign the value from our variable, to our editor
         editDisplay.Text = displayMessage;
     }
 ```
@@ -257,7 +257,7 @@ Submit your GitHub repository link
         />
     <Editor 
         x:Name="editDisplay"
-        IsEnabled="False"
+        IsReadOnly="True"
         />
     <Label
         Text="User Input - Short Message" 

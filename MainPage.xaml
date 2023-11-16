@@ -16,7 +16,7 @@
                 />
             <Editor 
                 x:Name="editDisplay"
-                IsEnabled="False"
+                IsReadOnly="True"
                 />
             <Label
                 Text="User Input - Short Message" 
